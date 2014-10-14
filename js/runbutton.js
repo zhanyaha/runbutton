@@ -1,7 +1,7 @@
 $(function() {
 	var startstopCounter=1;
 	var onoffCounter=1;
-	var startstopButton=function() {
+	var startstopButton=function(button) {
 		var pY=0;
 		var run;
 		var flag=true;
@@ -19,7 +19,7 @@ $(function() {
 			}
 		},60);
 	};
-	var onoffButton=function() {
+	var onoffButton=function(button) {
 		var pY=0;
 		var run;
 		var flag=true;
@@ -35,16 +35,16 @@ $(function() {
 				}
 				button.css({backgroundPositionY:pY});
 			}else{
-				onoffCounter=1;
+				onoffCounter=(onoffCounter===13)?1:onoffCounter;
 				clearInterval(run);
 			}
 		},60);
 	};
 	
 	$('#startstopButton').click(function(){
-		startstopButton();
+		startstopButton($(this));
 	});
 	$('#onoffButton').click(function(){
-		onoffButton();
+		onoffButton($(this));
 	});
 });
