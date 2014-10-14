@@ -1,26 +1,50 @@
 $(function() {
-	var button = $('#button');
-	var counter=1;
-	var pY=0;
-	var run;
-	var runButton=function() {
+	var startstopCounter=1;
+	var onoffCounter=1;
+	var startstopButton=function(button) {
+		var pY=0;
+		var run;
 		var flag=true;
 		clearInterval(run);
 		run=setInterval(function(){
-			if(counter!==91&&flag) {
-				pY=-(counter++)*300-30;
-				if (counter===46) {
+			if(startstopCounter!==91&&flag) {
+				pY=-(startstopCounter++)*300-30;
+				if (startstopCounter===46) {
 					flag = !flag;
 				}
 				button.css({backgroundPositionY:pY});
 			}else{
-				counter=(counter===91)?0:counter;
+				startstopCounter=(startstopCounter===91)?0:startstopCounter;
 				clearInterval(run);
 			}
 		},60);
 	};
-
-	button.click(function(){
-		runButton();
+	var onoffButton=function(button) {
+		var pY=0;
+		var run;
+		var flag=true;
+		clearInterval(run);
+		run=setInterval(function(){
+			if(onoffCounter!==13&&flag) {
+				pY=-(onoffCounter++)*300;
+				if (onoffCounter===13) {
+					pY=0;
+				}
+				if (onoffCounter===7) {
+					flag = !flag;
+				}
+				button.css({backgroundPositionY:pY});
+			}else{
+				onoffCounter=(onoffCounter===13)?1:onoffCounter;
+				clearInterval(run);
+			}
+		},60);
+	};
+	
+	$('#startstopButton').click(function(){
+		startstopButton($(this));
+	});
+	$('#onoffButton').click(function(){
+		onoffButton($(this));
 	});
 });
